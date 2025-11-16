@@ -1,6 +1,9 @@
 package ch.patrickjurt.itempicker;
 
 import ch.patrickjurt.itempicker.filemanager.FileManager;
+import org.bukkit.Bukkit;
+import org.bukkit.Sound;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -14,6 +17,7 @@ public class ItemPicker {
     private static final String FOUND_ITEMS_FILE = "foundItems.txt";
     private static final String REMAINING_ITEMS_FILE = "remainingItems.txt";
     private static final String ALL_ITEMS_RESOURCE = "allItems";
+    public static final int MAXITEMS = 1663;
 
     public static String currentItem;
 
@@ -31,7 +35,9 @@ public class ItemPicker {
 
     public static void isCurrentItem(JavaPlugin plugin, String itemName){
         if (itemName.equalsIgnoreCase(currentItem)){
-            plugin.getLogger().severe("HORRAAAYY");
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0f, 1.0f);
+            }
             getNewCurrentItem(plugin);
         }
     }
@@ -39,6 +45,7 @@ public class ItemPicker {
     private static void saveCurrentItem(JavaPlugin plugin) {
         FileManager.getCurrentItem(plugin);
         currentItem = FileManager.getCurrentItem(plugin);
+        Main.bossBarManager.updateMessage(currentItem.replace('_', ' '));
     }
 
     public static void fillRemainingItems(JavaPlugin plugin) {
@@ -54,6 +61,7 @@ public class ItemPicker {
             putCurrentItemToFound(plugin, currentFile, foundFile);
         }
         copyFirstRemainingToCurrent(plugin, remainingFile, currentFile);
+        Main.bossBarManager.updateMessage(currentItem.replace('_', ' '));
         removeFirstRemaining(plugin, remainingFile);
     }
 

@@ -22,10 +22,5 @@ public class PickupListener implements Listener {
     public void onPickup(EntityPickupItemEvent e) {
         ItemStack itemStack = e.getItem().getItemStack();
         ItemPicker.isCurrentItem(plugin, ItemPicker.formatItemName(itemStack));
-
-
-
-        Entity player = e.getEntity();
-        player.sendMessage("You picked up: " + ItemPicker.formatItemName(itemStack));
     }
 }

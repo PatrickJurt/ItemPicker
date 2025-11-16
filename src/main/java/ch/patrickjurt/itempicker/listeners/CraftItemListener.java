@@ -21,9 +21,5 @@ public class CraftItemListener implements Listener {
         ItemStack itemStack = e.getCurrentItem();
         if (itemStack == null) return;
         ItemPicker.isCurrentItem(plugin, ItemPicker.formatItemName(itemStack));
-
-
-        Entity player = e.getWhoClicked();
-        player.sendMessage("You picked up: " + ItemPicker.formatItemName(itemStack));
     }
 }

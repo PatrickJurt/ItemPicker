@@ -88,4 +88,19 @@ public class FileManager {
         }
     }
 
+    public static double countFoundItems(JavaPlugin plugin) {
+        File file = new File(plugin.getDataFolder(), "foundItems.txt");
+        if (!file.exists()) {
+            return 0; // File doesn't exist, so no items found
+        }
+
+        try {
+            List<String> lines = Files.readAllLines(file.toPath());
+            return lines.size();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return -1; // Indicates an error occurred
+        }
+
+    }
 }

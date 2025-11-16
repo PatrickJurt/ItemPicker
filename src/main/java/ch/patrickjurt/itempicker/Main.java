@@ -1,14 +1,12 @@
 package ch.patrickjurt.itempicker;
 
-import ch.patrickjurt.itempicker.listeners.CraftItemListener;
-import ch.patrickjurt.itempicker.listeners.InventoryClickListener;
-import ch.patrickjurt.itempicker.listeners.PickupListener;
-import ch.patrickjurt.itempicker.listeners.PlayerDeathListener;
+import ch.patrickjurt.itempicker.listeners.*;
 import org.bukkit.plugin.java.JavaPlugin;
 
 @SuppressWarnings("unused")
 public class Main extends JavaPlugin {
 
+    public static BossBarManager bossBarManager;
 
     @Override
     public void onEnable() {
@@ -18,8 +16,12 @@ public class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PickupListener(this), this);
         getServer().getPluginManager().registerEvents(new InventoryClickListener(this), this);
         getServer().getPluginManager().registerEvents(new CraftItemListener(this), this);
+        getServer().getPluginManager().registerEvents(new PlayerJoinListener(), this);
+
+        bossBarManager = new BossBarManager(this);
 
         ItemPicker.initialize(this);
+
     }
 
     @Override
