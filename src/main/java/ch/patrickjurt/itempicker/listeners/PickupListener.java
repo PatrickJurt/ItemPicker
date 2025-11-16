@@ -19,18 +19,13 @@ public class PickupListener implements Listener {
         Entity player = e.getEntity();
         ItemStack itemStack = e.getItem().getItemStack();
         String itemName = itemStack.getType().name();
-        String name = itemName;
+        String name;
 
         switch (itemName) {
-            case "POTION", "SPLASH_POTION", "LINGERING_POTION", "TIPPED_ARROW" -> {
-                name = itemName + "_" + getSpecialItem(itemStack, false);
-            }
-            case "ENCHANTED_BOOK" -> {
-                name = itemName + "_" + getSpecialItem(itemStack, true);
-            }
-            case "GOAT_HORN" -> {
-                name = getSpecialItem(itemStack, false);
-            }
+            case "POTION", "SPLASH_POTION", "LINGERING_POTION", "TIPPED_ARROW" -> name = itemName + "_" + getSpecialItem(itemStack, false);
+            case "ENCHANTED_BOOK" -> name = itemName + "_" + getSpecialItem(itemStack, true);
+            case "GOAT_HORN" -> name = getSpecialItem(itemStack, false);
+            default -> name = itemName;
         }
         player.sendMessage("You picked up " + name);
     }
