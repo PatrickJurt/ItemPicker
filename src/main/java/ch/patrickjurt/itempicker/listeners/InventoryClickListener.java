@@ -4,28 +4,26 @@ import ch.patrickjurt.itempicker.ItemPicker;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityPickupItemEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class PickupListener implements Listener {
+public class InventoryClickListener implements Listener {
 
     JavaPlugin plugin;
 
-    public PickupListener(JavaPlugin plugin) {
+    public InventoryClickListener(JavaPlugin plugin) {
         this.plugin = plugin;
     }
 
-    @SuppressWarnings("unused")
     @EventHandler
-    public void onPickup(EntityPickupItemEvent e) {
-        ItemStack itemStack = e.getItem().getItemStack();
+    public void onInventoryClick(InventoryClickEvent e) {
+        ItemStack itemStack = e.getCurrentItem();
+        if (itemStack == null) return;
         ItemPicker.isCurrentItem(plugin, ItemPicker.formatItemName(itemStack));
 
 
-
-        Entity player = e.getEntity();
+        Entity player = e.getWhoClicked();
         player.sendMessage("You picked up: " + ItemPicker.formatItemName(itemStack));
     }
 }

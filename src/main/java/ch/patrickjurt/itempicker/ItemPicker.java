@@ -1,6 +1,8 @@
 package ch.patrickjurt.itempicker;
 
 import ch.patrickjurt.itempicker.filemanager.FileManager;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.*;
@@ -125,5 +127,33 @@ public class ItemPicker {
     // 🔧 Helper to get file from plugin folder
     private static File getFile(JavaPlugin plugin, String filename) {
         return new File(plugin.getDataFolder(), filename);
+    }
+
+    public static String formatItemName(ItemStack itemStack) {
+        String itemName = itemStack.getType().name();
+        String name;
+
+        switch (itemName) {
+            case "POTION", "SPLASH_POTION", "LINGERING_POTION", "TIPPED_ARROW" -> name = itemName + "_" + getSpecialItem(itemStack, false);
+            case "ENCHANTED_BOOK" -> name = itemName + "_" + getSpecialItem(itemStack, true);
+            case "GOAT_HORN" -> name = getSpecialItem(itemStack, false);
+            default -> name = itemName;
+        }
+        return name;
+    }
+
+    public static String getSpecialItem(ItemStack itemStack, boolean isBook){
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        String marker = "minecraft:";
+        String metaAsString = itemMeta.toString();
+        int index = metaAsString.indexOf(marker);
+        if (index != -1) {
+            if (isBook) {
+                return metaAsString.substring(index + marker.length(), metaAsString.length() - 2).toUpperCase();
+            }else{
+                return metaAsString.substring(index + marker.length(), metaAsString.length() - 1).toUpperCase();
+            }
+        }
+        return "[ERROR] Item has weird meta: " + itemMeta;
     }
 }
