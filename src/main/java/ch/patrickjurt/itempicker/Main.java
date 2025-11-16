@@ -16,7 +16,7 @@ public class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PickupListener(this), this);
         getServer().getPluginManager().registerEvents(new InventoryClickListener(this), this);
         getServer().getPluginManager().registerEvents(new CraftItemListener(this), this);
-        getServer().getPluginManager().registerEvents(new PlayerJoinListener(), this);
+        getServer().getPluginManager().registerEvents(new PlayerJoinListener(this), this);
 
         bossBarManager = new BossBarManager(this);
 
