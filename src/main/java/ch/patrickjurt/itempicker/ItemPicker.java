@@ -27,7 +27,9 @@ public class ItemPicker {
         FileManager.existFile(plugin, REMAINING_ITEMS_FILE);
 
         if (FileManager.isEmpty(plugin, CURRENT_ITEM_FILE)) {
-            fillRemainingItems(plugin);
+            if (FileManager.isEmpty(plugin, FOUND_ITEMS_FILE)) {
+                fillRemainingItems(plugin);
+            }
             getNewCurrentItem(plugin);
         }
         saveCurrentItem(plugin);
