@@ -13,3 +13,9 @@
 # Ignore IntelliJ project files
 .idea/
 *.iml
+/compiler.xml
+/encodings.xml
+/IntelliLang.xml
+/jarRepositories.xml
+/misc.xml
+/vcs.xml
