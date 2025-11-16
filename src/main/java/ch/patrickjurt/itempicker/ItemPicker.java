@@ -17,7 +17,7 @@ public class ItemPicker {
     private static final String FOUND_ITEMS_FILE = "foundItems.txt";
     private static final String REMAINING_ITEMS_FILE = "remainingItems.txt";
     private static final String ALL_ITEMS_RESOURCE = "allItems";
-    public static final int MAXITEMS = 1663;
+    public static final int MAXITEMS = 1627;
 
     public static String currentItem;
 
