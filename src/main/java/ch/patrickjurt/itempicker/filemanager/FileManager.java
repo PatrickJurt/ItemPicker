@@ -3,6 +3,7 @@ package ch.patrickjurt.itempicker.filemanager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -79,6 +80,12 @@ public class FileManager {
         }
     }
 
-
+    public static String getCurrentItem(JavaPlugin plugin) {
+        try {
+            return Files.readString(new File(plugin.getDataFolder(), "currentItem.txt").toPath()).trim();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 }

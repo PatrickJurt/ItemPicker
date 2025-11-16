@@ -1,5 +1,6 @@
 package ch.patrickjurt.itempicker.listeners;
 
+import ch.patrickjurt.itempicker.ItemPicker;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -10,7 +11,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class PickupListener implements Listener {
 
+    JavaPlugin plugin;
+
     public PickupListener(JavaPlugin plugin) {
+        this.plugin = plugin;
     }
 
     @SuppressWarnings("unused")
@@ -28,6 +32,7 @@ public class PickupListener implements Listener {
             default -> name = itemName;
         }
         player.sendMessage("You picked up " + name);
+        ItemPicker.isCurrentItem(plugin, name);
     }
 
     public String getSpecialItem(ItemStack itemStack, boolean isBook){

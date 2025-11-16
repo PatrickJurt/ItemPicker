@@ -13,6 +13,8 @@ public class ItemPicker {
     private static final String REMAINING_ITEMS_FILE = "remainingItems.txt";
     private static final String ALL_ITEMS_RESOURCE = "allItems";
 
+    public static String currentItem;
+
     public static void initialize(JavaPlugin plugin) {
         FileManager.existFile(plugin, CURRENT_ITEM_FILE);
         FileManager.existFile(plugin, FOUND_ITEMS_FILE);
@@ -22,6 +24,19 @@ public class ItemPicker {
             fillRemainingItems(plugin);
             getNewCurrentItem(plugin);
         }
+        saveCurrentItem(plugin);
+    }
+
+    public static void isCurrentItem(JavaPlugin plugin, String itemName){
+        if (itemName.equalsIgnoreCase(currentItem)){
+            plugin.getLogger().severe("HORRAAAYY");
+            getNewCurrentItem(plugin);
+        }
+    }
+
+    private static void saveCurrentItem(JavaPlugin plugin) {
+        FileManager.getCurrentItem(plugin);
+        currentItem = FileManager.getCurrentItem(plugin);
     }
 
     public static void fillRemainingItems(JavaPlugin plugin) {
@@ -41,18 +56,11 @@ public class ItemPicker {
     }
 
     public static void putCurrentItemToFound(JavaPlugin plugin, File currentFile, File foundFile) {
-        try (
-                BufferedReader reader = new BufferedReader(new FileReader(currentFile));
-                BufferedWriter writer = new BufferedWriter(new FileWriter(foundFile, true))
-        ) {
-            String line = reader.readLine();
-            if (line != null && !line.trim().isEmpty()) {
-                writer.write(line);
-                writer.newLine();
-                plugin.getLogger().info("Appended current item to " + FOUND_ITEMS_FILE + ": " + line);
-            } else {
-                plugin.getLogger().warning(CURRENT_ITEM_FILE + " is empty!");
-            }
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(foundFile, true))) {
+            writer.write(currentItem);
+            writer.newLine();
+            plugin.getLogger().info("Appended current item to " + FOUND_ITEMS_FILE + ": " + currentItem);
+
         } catch (IOException e) {
             plugin.getLogger().severe("Error appending current item to " + FOUND_ITEMS_FILE);
             e.printStackTrace();
@@ -64,11 +72,12 @@ public class ItemPicker {
                 BufferedReader reader = new BufferedReader(new FileReader(remainingFile));
                 BufferedWriter writer = new BufferedWriter(new FileWriter(currentFile))
         ) {
-            String firstLine = reader.readLine();
-            if (firstLine != null && !firstLine.trim().isEmpty()) {
-                writer.write(firstLine);
+            String newCurrentItem = reader.readLine();
+            if (newCurrentItem != null && !newCurrentItem.trim().isEmpty()) {
+                writer.write(newCurrentItem);
                 writer.newLine();
-                plugin.getLogger().info("Copied first item to " + CURRENT_ITEM_FILE + ": " + firstLine);
+                currentItem = newCurrentItem;
+                plugin.getLogger().info("Copied first item to " + CURRENT_ITEM_FILE + ": " + newCurrentItem);
             } else {
                 plugin.getLogger().warning(REMAINING_ITEMS_FILE + " is empty!");
             }
