@@ -1,0 +1,120 @@
+package ch.patrickjurt.itempicker;
+
+import ch.patrickjurt.itempicker.filemanager.FileManager;
+import org.bukkit.plugin.java.JavaPlugin;
+
+import java.io.*;
+
+public class ItemPicker {
+
+    // 🔁 Reusable file name constants
+    private static final String CURRENT_ITEM_FILE = "currentItem.txt";
+    private static final String FOUND_ITEMS_FILE = "foundItems.txt";
+    private static final String REMAINING_ITEMS_FILE = "remainingItems.txt";
+    private static final String ALL_ITEMS_RESOURCE = "allItems";
+
+    public static void initialize(JavaPlugin plugin) {
+        FileManager.existFile(plugin, CURRENT_ITEM_FILE);
+        FileManager.existFile(plugin, FOUND_ITEMS_FILE);
+        FileManager.existFile(plugin, REMAINING_ITEMS_FILE);
+
+        if (FileManager.isEmpty(plugin, CURRENT_ITEM_FILE)) {
+            fillRemainingItems(plugin);
+            getNewCurrentItem(plugin);
+        }
+    }
+
+    public static void fillRemainingItems(JavaPlugin plugin) {
+        FileManager.copyFromResourcesToPluginFolder(plugin, ALL_ITEMS_RESOURCE, REMAINING_ITEMS_FILE);
+    }
+
+    public static void getNewCurrentItem(JavaPlugin plugin) {
+        File currentFile = getFile(plugin, CURRENT_ITEM_FILE);
+        File foundFile = getFile(plugin, FOUND_ITEMS_FILE);
+        File remainingFile = getFile(plugin, REMAINING_ITEMS_FILE);
+
+        if (!FileManager.isEmpty(plugin, CURRENT_ITEM_FILE)) {
+            putCurrentItemToFound(plugin, currentFile, foundFile);
+        }
+        copyFirstRemainingToCurrent(plugin, remainingFile, currentFile);
+        removeFirstRemaining(plugin, remainingFile);
+    }
+
+    public static void putCurrentItemToFound(JavaPlugin plugin, File currentFile, File foundFile) {
+        try (
+                BufferedReader reader = new BufferedReader(new FileReader(currentFile));
+                BufferedWriter writer = new BufferedWriter(new FileWriter(foundFile, true))
+        ) {
+            String line = reader.readLine();
+            if (line != null && !line.trim().isEmpty()) {
+                writer.write(line);
+                writer.newLine();
+                plugin.getLogger().info("Appended current item to " + FOUND_ITEMS_FILE + ": " + line);
+            } else {
+                plugin.getLogger().warning(CURRENT_ITEM_FILE + " is empty!");
+            }
+        } catch (IOException e) {
+            plugin.getLogger().severe("Error appending current item to " + FOUND_ITEMS_FILE);
+            e.printStackTrace();
+        }
+    }
+
+    public static void copyFirstRemainingToCurrent(JavaPlugin plugin,  File remainingFile, File currentFile) {
+        try (
+                BufferedReader reader = new BufferedReader(new FileReader(remainingFile));
+                BufferedWriter writer = new BufferedWriter(new FileWriter(currentFile))
+        ) {
+            String firstLine = reader.readLine();
+            if (firstLine != null && !firstLine.trim().isEmpty()) {
+                writer.write(firstLine);
+                writer.newLine();
+                plugin.getLogger().info("Copied first item to " + CURRENT_ITEM_FILE + ": " + firstLine);
+            } else {
+                plugin.getLogger().warning(REMAINING_ITEMS_FILE + " is empty!");
+            }
+        } catch (IOException e) {
+            plugin.getLogger().severe("Error copying first item to " + CURRENT_ITEM_FILE);
+            e.printStackTrace();
+        }
+    }
+
+    public static void removeFirstRemaining(JavaPlugin plugin, File remainingFile) {
+        File tempFile = getFile(plugin, "remainingItems_temp.txt");
+        try (
+                BufferedReader reader = new BufferedReader(new FileReader(remainingFile));
+                BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile))
+        ) {
+            String line = reader.readLine(); // skip first
+            if (line == null) {
+                plugin.getLogger().warning(REMAINING_ITEMS_FILE + " was already empty.");
+                return;
+            }
+
+            while ((line = reader.readLine()) != null) {
+                writer.write(line);
+                writer.newLine();
+            }
+
+        } catch (IOException e) {
+            plugin.getLogger().severe("Error removing first line from " + REMAINING_ITEMS_FILE);
+            e.printStackTrace();
+            return;
+        }
+
+        if (!remainingFile.delete()) {
+            plugin.getLogger().severe("Failed to delete original " + REMAINING_ITEMS_FILE);
+            return;
+        }
+
+        if (!tempFile.renameTo(remainingFile)) {
+            plugin.getLogger().severe("Failed to rename temp file to " + REMAINING_ITEMS_FILE);
+        } else {
+            plugin.getLogger().info("Removed first item from " + REMAINING_ITEMS_FILE);
+        }
+    }
+
+    // 🔧 Helper to get file from plugin folder
+    private static File getFile(JavaPlugin plugin, String filename) {
+        return new File(plugin.getDataFolder(), filename);
+    }
+}
