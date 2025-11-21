@@ -28,7 +28,7 @@ public class ChatUtil {
         DecimalFormat df = new DecimalFormat("#.##");
         return new String[]{
                 "Found items: " + ChatColor.GREEN + FileManager.countFoundItems(plugin) + "/" + MAXITEMS,
-                "You have achieved " + df.format((((double) FileManager.countFoundItems(plugin))/MAXITEMS)*100) + "%"};
+                "You have achieved " + ChatColor.GREEN + df.format((((double) FileManager.countFoundItems(plugin))/MAXITEMS)*100) + "%"};
     }
 
     public static void sendProgressMessage(JavaPlugin plugin) {
