@@ -40,9 +40,12 @@ public class ItemPicker {
         if (itemName.equalsIgnoreCase(currentItem)){
             for (Player player : Bukkit.getOnlinePlayers()) {
                 player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0f, 1.0f);
-                player.sendMessage(ChatUtil.createMessage("Found items: " + ChatColor.GREEN + FileManager.countFoundItems(plugin) + "/" + MAXITEMS));
             }
             getNewCurrentItem(plugin);
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                player.sendMessage(ChatUtil.createMessage("Found items: " + ChatColor.GREEN + FileManager.countFoundItems(plugin) + "/" + MAXITEMS));
+                player.sendMessage(ChatUtil.createMessage("You have achieved " + (0.0 + FileManager.countFoundItems(plugin)/MAXITEMS*100) + "%"));
+            }
         }
     }
 

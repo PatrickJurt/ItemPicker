@@ -26,5 +26,6 @@ public class PlayerJoinListener implements Listener {
         Main.bossBarManager.addPlayer(p);
         p.sendMessage(ChatUtil.createMessage("Good to see you, " + p.getName() + "!"));
         p.sendMessage(ChatUtil.createMessage(ChatColor.GREEN + "" + FileManager.countFoundItems(plugin) + "/" + MAXITEMS));
+        p.sendMessage(ChatUtil.createMessage("You have achieved " + (0.0 + FileManager.countFoundItems(plugin)/MAXITEMS*100) + "%"));
     }
 }

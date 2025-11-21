@@ -88,7 +88,7 @@ public class FileManager {
         }
     }
 
-    public static double countFoundItems(JavaPlugin plugin) {
+    public static int countFoundItems(JavaPlugin plugin) {
         File file = new File(plugin.getDataFolder(), "foundItems.txt");
         if (!file.exists()) {
             return 0; // File doesn't exist, so no items found

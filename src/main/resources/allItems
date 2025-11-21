@@ -18,6 +18,7 @@ Acacia_Trapdoor
 Acacia_Wood
 Activator_Rail
 Allium
+Amethyst_Block
 Amethyst_Cluster
 Amethyst_Shard
 Ancient_Debris
@@ -35,6 +36,7 @@ Azalea_Leaves
 Azure_Bluet
 Baked_Potato
 Bamboo
+Bamboo_Block
 Bamboo_Button
 Bamboo_Door
 Bamboo_Fence
@@ -112,23 +114,6 @@ Blackstone_Wall
 Blast_Furnace
 Blaze_Powder
 Blaze_Rod
-Block_Amethyst
-Block_Bamboo
-Block_Coal
-Block_Copper
-Block_Diamond
-Block_Emerald
-Block_Gold
-Block_Iron
-Block_Lapis_Lazuli
-Block_Netherite
-Block_Quartz
-Block_Raw_Copper
-Block_Raw_Gold
-Block_Raw_Iron
-Block_Redstone
-Block_Resin
-Block_Stripped_Bamboo
 Blue_Banner
 Blue_Bed
 Blue_Bundle
@@ -255,6 +240,7 @@ Clay_Ball
 Clock
 Closed_Eyeblossom
 Coal
+Coal_Block
 Coal_Ore
 Coarse_Dirt
 Cobbled_Deepslate
@@ -279,6 +265,7 @@ Cooked_Salmon
 Cookie
 Copper_Axe
 Copper_Bars
+Copper_Block
 Copper_Boots
 Copper_Bulb
 Copper_Chain
@@ -411,6 +398,7 @@ Deepslate_Tiles
 Detector_Rail
 Diamond
 Diamond_Axe
+Diamond_Block
 Diamond_Boots
 Diamond_Chestplate
 Diamond_Helmet
@@ -440,6 +428,7 @@ Echo_Shard
 Egg
 Elytra
 Emerald
+Emerald_Block
 Emerald_Ore
 Empty_Map
 Enchanted_Golden_Apple
@@ -507,6 +496,7 @@ Ponder_Goat_Horn
 Seek_Goat_Horn
 Sing_Goat_Horn
 Yearn_Goat_Horn
+Gold_Block
 Gold_Ingot
 Gold_Nugget
 Gold_Ore
@@ -577,6 +567,7 @@ Ice
 Ink_Sac
 Iron_Axe
 Iron_Bars
+Iron_Block
 Iron_Boots
 Iron_Chain
 Iron_Chestplate
@@ -617,6 +608,7 @@ Jungle_Wood
 Kelp
 Ladder
 Lantern
+Lapis_Block
 Lapis_Lazuli
 Lapis_Lazuli_Ore
 Large_Amethyst_Bud
@@ -789,6 +781,7 @@ Nether_Star
 Nether_Wart
 Nether_Wart_Block
 Netherite_Axe
+Netherite_Block
 Netherite_Boots
 Netherite_Chestplate
 Netherite_Helmet
@@ -976,6 +969,7 @@ Purpur_Block
 Purpur_Pillar
 Purpur_Slab
 Purpur_Stairs
+Quartz_Block
 Quartz_Bricks
 Quartz_Pillar
 Quartz_Slab
@@ -988,8 +982,11 @@ Raw_Beef
 Raw_Chicken
 Raw_Cod
 Raw_Copper
+Raw_Copper_Block
 Raw_Gold
+Raw_Gold_Block
 Raw_Iron
+Raw_Iron_Block
 Raw_Mutton
 Raw_Porkchop
 Raw_Rabbit
@@ -1022,12 +1019,14 @@ Red_Stained_Glass_Pane
 Red_Terracotta
 Red_Tulip
 Red_Wool
+Redstone_Block
 Redstone_Comparator
 Redstone_Dust
 Redstone_Lamp
 Redstone_Ore
 Redstone_Repeater
 Redstone_Torch
+Resin-Block
 Resin_Brick
 Resin_Brick_Slabs
 Resin_Brick_Stairs
@@ -1131,6 +1130,7 @@ Stonecutter
 String
 Stripped_Acacia_Log
 Stripped_Acacia_Wood
+Stripped_Bamboo_Block
 Stripped_Birch_Log
 Stripped_Birch_Wood
 Stripped_Cherry_Log
