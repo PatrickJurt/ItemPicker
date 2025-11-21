@@ -138,7 +138,6 @@ Bone_Meal
 Book
 Book_and_Quill
 Bookshelf
-Bottle_o'_Enchanting
 Bow
 Bowl
 Brain_Coral
@@ -418,7 +417,7 @@ Disc_Fragment
 Dispenser
 Dragon_Egg
 Dragon_Head
-Dragon's_Breath
+Dragon_Breath
 Dried_Ghast
 Dried_Kelp
 Dried_Kelp_Block
@@ -442,6 +441,7 @@ End_Stone_Brick_Wall
 End_Stone_Bricks
 Ender_Chest
 Ender_Pearl
+Experience_Bottle
 Exposed_Chiseled_Copper
 Exposed_Copper
 Exposed_Copper_Bars
@@ -584,7 +584,7 @@ Iron_Shovel
 Iron_Sword
 Iron_Trapdoor
 Item_Frame
-Jack_o'Lantern
+Jack_o_Lantern
 Jukebox
 Jungle_Boat
 Jungle_Chest_Boat
@@ -976,7 +976,7 @@ Quartz_Slab
 Quartz_Stairs
 Rabbit_Hide
 Rabbit_Stew
-Rabbit's_Foot
+Rabbit_Foot
 Rail
 Raw_Beef
 Raw_Chicken

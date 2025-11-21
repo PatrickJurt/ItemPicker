@@ -1,6 +1,13 @@
 package ch.patrickjurt.itempicker;
 
+import ch.patrickjurt.itempicker.filemanager.FileManager;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
+
+import java.text.DecimalFormat;
+
+import static ch.patrickjurt.itempicker.ItemPicker.MAXITEMS;
 
 public class ChatUtil {
 
@@ -15,5 +22,24 @@ public class ChatUtil {
                 ChatColor.RED + "] " +
                 ChatColor.WHITE + " " + message;
 
+    }
+
+    public static String[] getProgressMessage(JavaPlugin plugin) {
+        DecimalFormat df = new DecimalFormat("#.##");
+        return new String[]{
+                "Found items: " + ChatColor.GREEN + FileManager.countFoundItems(plugin) + "/" + MAXITEMS,
+                "You have achieved " + df.format((((double) FileManager.countFoundItems(plugin))/MAXITEMS)*100) + "%"};
+    }
+
+    public static void sendProgressMessage(JavaPlugin plugin) {
+        String[] msgs = getProgressMessage(plugin);
+        broadcast(plugin, msgs[0]);
+        broadcast(plugin, msgs[1]);
+    }
+
+    public static void broadcast(JavaPlugin plugin, String message) {
+        for (Player p : plugin.getServer().getOnlinePlayers()) {
+            p.sendMessage(createMessage(message));
+        }
     }
 }

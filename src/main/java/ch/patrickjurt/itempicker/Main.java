@@ -1,5 +1,6 @@
 package ch.patrickjurt.itempicker;
 
+import ch.patrickjurt.itempicker.commands.ItemPickerCommand;
 import ch.patrickjurt.itempicker.listeners.*;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -11,6 +12,8 @@ public class Main extends JavaPlugin {
     @Override
     public void onEnable() {
         getLogger().info("ItemPicker enabled!");
+
+        this.getCommand("itempicker").setExecutor(new ItemPickerCommand(this));
 
         getServer().getPluginManager().registerEvents(new PlayerDeathListener(), this);
         getServer().getPluginManager().registerEvents(new PickupListener(this), this);

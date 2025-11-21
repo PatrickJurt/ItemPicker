@@ -2,3 +2,8 @@ name: ItemPicker
 version: 1.0.0
 main: ch.patrickjurt.itempicker.Main
 api-version: 1.20
+commands:
+  itempicker:
+    description: Base command for item picker
+    usage: /itempicker <subcommand>
+    aliases: [ip]

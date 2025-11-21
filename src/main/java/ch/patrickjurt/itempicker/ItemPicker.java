@@ -2,7 +2,6 @@ package ch.patrickjurt.itempicker;
 
 import ch.patrickjurt.itempicker.filemanager.FileManager;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -41,12 +40,13 @@ public class ItemPicker {
             for (Player player : Bukkit.getOnlinePlayers()) {
                 player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1.0f, 1.0f);
             }
-            getNewCurrentItem(plugin);
-            for (Player player : Bukkit.getOnlinePlayers()) {
-                player.sendMessage(ChatUtil.createMessage("Found items: " + ChatColor.GREEN + FileManager.countFoundItems(plugin) + "/" + MAXITEMS));
-                player.sendMessage(ChatUtil.createMessage("You have achieved " + (0.0 + FileManager.countFoundItems(plugin)/MAXITEMS*100) + "%"));
-            }
+            getNext(plugin);
         }
+    }
+
+    public static void getNext(JavaPlugin plugin){
+        getNewCurrentItem(plugin);
+        ChatUtil.sendProgressMessage(plugin);
     }
 
     private static void saveCurrentItem(JavaPlugin plugin) {
