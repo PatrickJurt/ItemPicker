@@ -58,7 +58,6 @@ Banner_Pattern_Bordure_Indented
 Banner_Pattern_Creeper_Charge
 Banner_Pattern_Field_Masoned
 Banner_Pattern_Flow
-Banner_Pattern_Flower_Charge
 Banner_Pattern_Globe
 Banner_Pattern_Gust
 Banner_Pattern_Skull_Charge
@@ -472,6 +471,7 @@ Fishing_Rod
 Fletching_Table
 Flint
 Flint_and_Steel
+Flower_Banner_Pattern
 Flower_Pot
 Flowering_Azalea
 Flowering_Azalea_Leaves
