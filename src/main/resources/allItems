@@ -62,7 +62,6 @@ Banner_Pattern_Globe
 Banner_Pattern_Gust
 Banner_Pattern_Skull_Charge
 Banner_Pattern_Snout
-Banner_Pattern_Thing
 Barrel
 Basalt
 Beacon
@@ -725,6 +724,7 @@ Chest_Minecart
 Furnace_Minecart
 Hopper_Minecart
 TNT_Minecart
+Mojang_Banner_Pattern
 Moss_Block
 Moss_Carpet
 Mossy_Cobblestone
